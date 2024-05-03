@@ -36,18 +36,25 @@ class Vendor(models.Model):
     def calculate_quality_rating_avg(self):
         return self.purchase_orders.filter(
             status=PurchaseOrder.COMPLETED
-        ).aggregate(Avg("quality_rating"))["quality_rating__avg"]
+        ).aggregate(Avg("quality_rating", default=0.0))["quality_rating__avg"]
 
     def update_quality_rating_avg(self):
         self.quality_rating_avg = self.calculate_quality_rating_avg()
         self.save(update_fields=["quality_rating_avg"])
 
     def calculate_average_response_time(self):
-        return self.purchase_orders.filter(
+        average_response_time = self.purchase_orders.filter(
             status=PurchaseOrder.COMPLETED
         ).annotate(
-            diff=F("acknowledgment_date") - F("issue_date")
-        ).aggregate(Avg("diff"))["diff__avg"]
+            response_time_diff=F("acknowledgment_date") - F("issue_date"),
+        ).aggregate(
+            average_response_time=Avg("response_time_diff")
+        )["average_response_time"]
+
+        if average_response_time is None:
+            return 0
+
+        return average_response_time.total_seconds()
 
     def update_average_response_time(self):
         self.average_response_time = self.calculate_average_response_time()

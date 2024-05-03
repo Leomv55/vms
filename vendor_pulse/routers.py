@@ -6,5 +6,5 @@ from .views import (
 )
 
 vp_api_router = routers.DefaultRouter()
-vp_api_router.register(r'vendors', VendorModelViewSet)
-vp_api_router.register(r'purchase_orders', PurchaseOrderModelViewSet)
+vp_api_router.register(r"vendors", VendorModelViewSet)
+vp_api_router.register(r"purchase_orders", PurchaseOrderModelViewSet)
