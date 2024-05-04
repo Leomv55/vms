@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.types import OpenApiTypes
 
 from .models import (
     Vendor,
@@ -25,12 +26,28 @@ class VendorModelViewSet(ModelViewSet):
 
     @extend_schema(
         description="Get performance metrics for the vendor.",
+        parameters=[
+            OpenApiParameter(
+                name="recalculate",
+                description='''Recalculate the performance metrics
+                <ul>
+                    <li>0 for not to recalculate. (Default)</li>
+                    <li>1 to recalculate.</li>
+                </ul>''',
+                default="0",
+                required=False,
+                type=OpenApiTypes.NUMBER,
+                enum=[0, 1],
+            )
+        ],
         responses=VendorPerformanceSerializer
     )
     @action(detail=True, methods=["get"])
     def performance(self, request, pk=None):
         vendor: Vendor = self.get_object()
-        vendor.recalculate_performance_metrics()
+        recalculate = request.query_params.get("recalculate", "0") == "1"
+        if recalculate:
+            vendor.recalculate_performance_metrics()
         vender_performance = VendorPerformanceSerializer(vendor)
         return Response(vender_performance.data)
 
@@ -40,3 +57,15 @@ class PurchaseOrderModelViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = PurchaseOrder.objects.all()
     serializer_class = PurchaseOrderSerializer
+
+    @extend_schema(
+        description="Acknowledge the purchase order.",
+        request=None,
+        responses=PurchaseOrderSerializer
+    )
+    @action(detail=True, methods=["post"])
+    def acknowledge(self, request, pk=None):
+        purchase_order: PurchaseOrder = self.get_object()
+        purchase_order.acknowledge()
+        purchase_order_serializer = PurchaseOrderSerializer(purchase_order)
+        return Response(purchase_order_serializer.data)

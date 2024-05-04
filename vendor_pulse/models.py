@@ -121,6 +121,10 @@ class PurchaseOrder(models.Model):
     def __str__(self) -> str:
         return self.po_number
 
+    def acknowledge(self):
+        self.acknowledgment_date = timezone.now()
+        self.save(update_fields=["acknowledgment_date"])
+
 
 class HistoricalPerformance(models.Model):
     vendor = models.ForeignKey(Vendor, related_name="historical_performances", on_delete=models.CASCADE)
