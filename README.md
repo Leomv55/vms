@@ -1,25 +1,25 @@
-# Vendor Management System
+# 📦 Vendor Management System
 
 The Vendor Management System is a web application built with Django that allows users to manage vendors, their contact details, and performance metrics.
 
 ## Table of Contents
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [API Documentation](#api-documentation)
-  - [Authentication](#authentication)
-  - [Endpoints](#endpoints)
-- [Contributing](#contributing)
-- [License](#license)
+- [🛠️ Features](#features)
+- [📋 Installation](#installation)
+- [💻 Usage](#usage)
+  - [📘 API Documentation](#api-documentation)
+  - [🔐 Authentication](#authentication)
+  - [⚙️ Endpoints](#endpoints)
+- [🤝 Contributing](#contributing)
+- [📜 License](#license)
 
-## Features
+## 🛠️ Features
 
 - :pencil: CRUD operations for vendors
 - :chart_with_upwards_trend: Performance metrics calculation
 - :lock: Authentication with token-based authentication
 - :gear: API endpoints for integration with other systems
 
-## Installation
+## 📋 Installation
 
 1. Clone the repository:
 
@@ -64,20 +64,20 @@ The Vendor Management System is a web application built with Django that allows 
 
 The application will be accessible at `http://localhost:8000`.
 
-## Usage
+## 💻  Usage
 
-### API Documentation
+### 📘 API Documentation
 API documentation is available at 
-- Redoc - `/api/docs/`
-- Swagger - `/api/docs/swagger/`
+- 📕 Redoc - `/api/docs/`
+- 📕 Swagger - `/api/docs/swagger/`
 
 endpoints when the server is running. You can explore and test the API endpoints using Swagger UI.
 
-### Authentication
+### 🔐 Authentication
 
 The API endpoints require authentication using a token. To obtain a token, send a POST request to `/api/token/` with your username and password in the request body. You will receive a token in the response, which you can use to authenticate subsequent requests by including it in the Authorization header as `Bearer <token>`.
 
-### Endpoints
+### ⚙️ Endpoints
 #### General API endpoints available are:
 - **POST /api/token/**: Obtain a token for authentication.
 
@@ -98,10 +98,10 @@ The API endpoints require authentication using a token. To obtain a token, send 
 - **PATCH /api/purchase_orders/{id}/**: Update status of a specific purchase order.
 - **DELETE /api/purchase_orders/{id}/**: Delete a specific purchase order.
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Feel free to open issues or pull requests.
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
