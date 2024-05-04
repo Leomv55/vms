@@ -39,7 +39,7 @@ The Vendor Management System is a web application built with Django that allows 
     pipenv install
     ```
 
-4. Activate the virtual environment:
+4. Activate the virtual environment (Optional):
 
     ```bash
     pipenv shell
@@ -50,16 +50,28 @@ The Vendor Management System is a web application built with Django that allows 
     ```bash
     python manage.py migrate
     ```
+    or if not inside the virtual environment:
+    ```bash
+    pipenv run python manage.py migrate
+    ```
 
 6. Run the development server:
 
     ```bash
     python manage.py runserver
     ```
+    or if not inside the virtual environment:
+    ```bash
+    pipenv run python manage.py runserver
+    ```
 7. Run the tests:
 
     ```bash
     python manage.py test
+    ```
+    or if not inside the virtual environment:
+    ```bash
+    pipenv run python manage.py test
     ```
 
 The application will be accessible at `http://localhost:8000`.
@@ -75,7 +87,18 @@ endpoints when the server is running. You can explore and test the API endpoints
 
 ### 🔐 Authentication
 
-The API endpoints require authentication using a token. To obtain a token, send a POST request to `/api/token/` with your username and password in the request body. You will receive a token in the response, which you can use to authenticate subsequent requests by including it in the Authorization header as `Bearer <token>`.
+- The API endpoints require authentication using a token. To obtain a token, send a POST request to `/api/token/` with your username and password in the request body. 
+- You will receive a token in the response, which you can use to authenticate subsequent requests by including it in the `Authorization` header as `Bearer <token>`.
+
+- Create a superuser to access the Django admin panel to create token.
+
+```bash
+python manage.py createsuperuser
+```
+or if not inside the virtual environment:
+```bash
+pipenv run python manage.py createsuperuser
+```
 
 ### ⚙️ Endpoints
 #### General API endpoints available are:
