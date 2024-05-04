@@ -22,7 +22,7 @@ class PurchaseOrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PurchaseOrder
-        exclude = ("id", "vendor")
+        exclude = ("id", )
 
 
 class VendorPerformanceSerializer(serializers.ModelSerializer):
