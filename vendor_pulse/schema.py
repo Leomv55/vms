@@ -9,6 +9,10 @@ from .serializers import (
 
 class PurchaseOrderSchema:
     @classmethod
+    def schema(cls):
+        return extend_schema(tags=["Purchase orders"])
+
+    @classmethod
     def docs(cls):
         return extend_schema_view(
             list=cls.list_purchase_orders(),
@@ -72,6 +76,10 @@ class PurchaseOrderSchema:
 
 
 class VendorSchema:
+    @classmethod
+    def schema(cls):
+        return extend_schema(tags=["Vendors"])
+
     @classmethod
     def docs(cls):
         return extend_schema_view(

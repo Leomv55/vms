@@ -16,21 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
 
-from rest_framework.authtoken import views
-from drf_spectacular.views import (
-    SpectacularAPIView,
-    SpectacularRedocView,
-    SpectacularSwaggerView
-)
+from .views import CreateAPIAuthToken
 
 api_urlpatterns = [
     # General api urls
-    path("token/", views.obtain_auth_token),
-    path("docs/schema/", SpectacularAPIView.as_view(custom_settings=settings.SPECTACULAR_SETTINGS), name="schema"),
-    path("docs/swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
-    path("docs/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
+    path("token/", CreateAPIAuthToken.as_view(), name="token"),
+    path("docs/", include("vms.docs.urls")),
 
     # App api urls
     path("", include("vendor_pulse.urls")),

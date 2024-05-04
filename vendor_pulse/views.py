@@ -3,9 +3,6 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
-from drf_spectacular.utils import extend_schema, OpenApiParameter
-from drf_spectacular.types import OpenApiTypes
-
 from .models import (
     Vendor,
     PurchaseOrder,
@@ -22,6 +19,7 @@ from .schema import (
 )
 
 
+@vendor_schema.schema()
 @vendor_schema.docs()
 class VendorModelViewSet(ModelViewSet):
     authentication_classes = [CustomTokenAuthentication]
@@ -39,6 +37,7 @@ class VendorModelViewSet(ModelViewSet):
         return Response(vender_performance.data)
 
 
+@purchase_order_schema.schema()
 @purchase_order_schema.docs()
 class PurchaseOrderModelViewSet(ModelViewSet):
     authentication_classes = [CustomTokenAuthentication]

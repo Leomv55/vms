@@ -132,7 +132,7 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Vendor Management System",
-    "DESCRIPTION": "API for Vendor Management System. This API is used to manage vendors, purchase orders, and vendor performance metrics.",
+    "DESCRIPTION": "APIs for Vendor Management System. <br><br> This APIs is used to manage vendors, purchase orders, and vendor performance metrics.",
     "VERSION": "1.0.0",
     "SORT_OPERATIONS": False
 }
