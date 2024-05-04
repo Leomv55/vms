@@ -82,18 +82,6 @@ class Vendor(models.Model):
             fulfillment_rate=self.fulfillment_rate
         )
 
-    def recalculate_performance_metrics(self):
-        self.on_time_delivery_rate = self.calculate_on_time_delivery_rate()
-        self.quality_rating_avg = self.calculate_quality_rating_avg()
-        self.average_response_time = self.calculate_average_response_time()
-        self.fulfillment_rate = self.calculate_fulfillment_rate()
-        self.save(update_fields=[
-            "on_time_delivery_rate",
-            "quality_rating_avg",
-            "average_response_time",
-            "fulfillment_rate"
-        ])
-
 
 class PurchaseOrder(models.Model):
     PENDING = "pending"

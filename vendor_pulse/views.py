@@ -30,9 +30,6 @@ class VendorModelViewSet(ModelViewSet):
     @action(detail=True, methods=["get"])
     def performance(self, request, pk=None):
         vendor: Vendor = self.get_object()
-        recalculate = request.query_params.get("recalculate", "0") == "1"
-        if recalculate:
-            vendor.recalculate_performance_metrics()
         vender_performance = VendorPerformanceSerializer(vendor)
         return Response(vender_performance.data)
 
