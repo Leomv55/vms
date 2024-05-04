@@ -56,6 +56,11 @@ The Vendor Management System is a web application built with Django that allows 
     ```bash
     python manage.py runserver
     ```
+7. Run the tests:
+
+    ```bash
+    python manage.py test
+    ```
 
 The application will be accessible at `http://localhost:8000`.
 
