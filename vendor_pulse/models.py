@@ -44,9 +44,7 @@ class Vendor(models.Model):
         self.save(update_fields=["quality_rating_avg"])
 
     def calculate_average_response_time(self):
-        average_response_time = self.purchase_orders.filter(
-            status=PurchaseOrder.COMPLETED
-        ).annotate(
+        average_response_time = self.purchase_orders.annotate(
             response_time_diff=F("acknowledgment_date") - F("issue_date"),
         ).aggregate(
             average_response_time=Avg("response_time_diff")
