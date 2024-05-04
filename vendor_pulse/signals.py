@@ -40,14 +40,23 @@ def save_updated_fields(sender, instance: PurchaseOrder, **kwargs):
 
 
 @receiver(post_save, sender=PurchaseOrder)
-def update_vendor_performance_metrics(sender, instance: PurchaseOrder, created, **kwargs):
+def update_vendor_performance_metrics(
+    sender, instance: PurchaseOrder, created, **kwargs
+):
     if created:
         return
 
     vendor = instance.vendor
-    should_update_on_time_delivery_rate = instance._status != instance.status and instance.status == PurchaseOrder.COMPLETED
-    should_quality_rating_avg = instance._quality_rating != instance.quality_rating
-    should_update_average_response_time = instance._acknowledgment_date != instance.acknowledgment_date
+    should_update_on_time_delivery_rate = (
+        instance._status != instance.status
+        and instance.status == PurchaseOrder.COMPLETED
+    )
+    should_quality_rating_avg = (
+        instance._quality_rating != instance.quality_rating
+    )
+    should_update_average_response_time = (
+        instance._acknowledgment_date != instance.acknowledgment_date
+    )
     should_update_fulfillment_rate = instance._status != instance.status
 
     if should_update_on_time_delivery_rate:

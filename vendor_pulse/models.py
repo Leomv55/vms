@@ -130,7 +130,10 @@ class PurchaseOrder(models.Model):
 
 class HistoricalPerformance(models.Model):
     vendor = models.ForeignKey(
-        Vendor, related_name="historical_performances", on_delete=models.CASCADE)
+        Vendor,
+        related_name="historical_performances",
+        on_delete=models.CASCADE
+    )
     date = models.DateTimeField()
     on_time_delivery_rate = models.FloatField()
     quality_rating_avg = models.FloatField()
