@@ -71,6 +71,7 @@ class PurchaseOrderSchema:
         return extend_schema(
             summary="Acknowledge purchase order",
             description="Acknowledge a purchase order by ID.",
+            request=None,
             responses=PurchaseOrderSerializer
         )
 

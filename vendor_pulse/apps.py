@@ -6,4 +6,4 @@ class VendorPulseConfig(AppConfig):
     name = "vendor_pulse"
 
     def ready(self):
-        from .signals import create_performance_history, save_updated_fields, update_vendor_performance_metrics # noqa
+        from . import signals # noqa

@@ -18,9 +18,11 @@ class VendorSerializer(serializers.ModelSerializer):
 
 
 class PurchaseOrderSerializer(serializers.ModelSerializer):
+    vendor_code = serializers.ReadOnlyField(source="vendor.vendor_code")
+
     class Meta:
         model = PurchaseOrder
-        fields = "__all__"
+        exclude = ("id", "vendor")
 
 
 class VendorPerformanceSerializer(serializers.ModelSerializer):
