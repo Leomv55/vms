@@ -14,10 +14,10 @@ The Vendor Management System is a web application built with Django that allows 
 
 ## Features
 
-- CRUD operations for vendors
-- Performance metrics calculation
-- Authentication with token-based authentication
-- API endpoints for integration with other systems
+- :pencil: CRUD operations for vendors
+- :chart_with_upwards_trend: Performance metrics calculation
+- :lock: Authentication with token-based authentication
+- :gear: API endpoints for integration with other systems
 
 ## Installation
 
