@@ -129,3 +129,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Vendor Management System",
+    "DESCRIPTION": "API for Vendor Management System. This API is used to manage vendors, purchase orders, and vendor performance metrics.",
+    "VERSION": "1.0.0",
+    "SORT_OPERATIONS": False
+}

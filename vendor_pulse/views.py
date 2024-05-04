@@ -16,32 +16,19 @@ from .serializers import (
     VendorPerformanceSerializer,
 )
 from .authentication import CustomTokenAuthentication
+from .schema import (
+    VendorSchema as vendor_schema,
+    PurchaseOrderSchema as purchase_order_schema,
+)
 
 
+@vendor_schema.docs()
 class VendorModelViewSet(ModelViewSet):
     authentication_classes = [CustomTokenAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Vendor.objects.all()
     serializer_class = VendorSerializer
 
-    @extend_schema(
-        description="Get performance metrics for the vendor.",
-        parameters=[
-            OpenApiParameter(
-                name="recalculate",
-                description='''Recalculate the performance metrics
-                <ul>
-                    <li>0 for not to recalculate. (Default)</li>
-                    <li>1 to recalculate.</li>
-                </ul>''',
-                default="0",
-                required=False,
-                type=OpenApiTypes.NUMBER,
-                enum=[0, 1],
-            )
-        ],
-        responses=VendorPerformanceSerializer
-    )
     @action(detail=True, methods=["get"])
     def performance(self, request, pk=None):
         vendor: Vendor = self.get_object()
@@ -52,17 +39,13 @@ class VendorModelViewSet(ModelViewSet):
         return Response(vender_performance.data)
 
 
+@purchase_order_schema.docs()
 class PurchaseOrderModelViewSet(ModelViewSet):
     authentication_classes = [CustomTokenAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = PurchaseOrder.objects.all()
     serializer_class = PurchaseOrderSerializer
 
-    @extend_schema(
-        description="Acknowledge the purchase order.",
-        request=None,
-        responses=PurchaseOrderSerializer
-    )
     @action(detail=True, methods=["post"])
     def acknowledge(self, request, pk=None):
         purchase_order: PurchaseOrder = self.get_object()
